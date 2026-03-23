@@ -1,0 +1,42 @@
+experiment_name: "uncertain_segformer_mit_b3"
+seed: 42
+
+model:
+  arch: "SegFormer"        # <--- NEW: Tells Factory to use SegFormer
+  encoder: "mit_b3"     # <--- NEW: Use MiT-B3 backbone for better performance
+  pretrained: true
+
+data:
+  dataset: "deepglobe"
+  root_dir: "/content/data/DeepGlobe" # YOUR PATH
+  num_classes: 7
+  ignore_index: 6
+  image_size: 512
+
+training:
+  device: "cuda"
+  epochs: 30            # <--- BETTER: 30 epochs is usually sufficient for SegFormer
+  batch_size: 32            # SegFormer is efficient, can use larger batch
+  num_workers: 4           # More workers for faster data loading
+  checkpoint_dir: "/content/drive/MyDrive/satellite-segmentation/checkpoints/segformer"
+  output_dir: "/content/drive/MyDrive/satellite-segmentation/outputs/segformer"
+  grad_clip: 1.0
+  resume: false
+
+optimizer:
+  lr: 0.00006              # 6e-5
+  weight_decay: 0.01
+
+scheduler:
+  min_lr: 0.000001
+
+loss:
+  name: "evidential"
+  annealing_step: 15       # <--- BETTER: Ramps up penalty over 10 epochs
+
+augmentation:              # KEPT YOUR AUGMENTATIONS
+  color_jitter: 0.3
+  blur: 0.2
+  brightness_contrast: 0.5
+  noise: 0.2
+  center_crop_val: true

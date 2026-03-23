@@ -1,0 +1,121 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36" version="29.6.1">
+  <diagram id="sequence" name="Sequence">
+    <mxGraphModel dx="1185" dy="563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="life1" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;shadow=1;" value="train_uncertain.py&#xa;(Main Loop)" vertex="1">
+          <mxGeometry height="360" width="120" x="80" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="life2" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;shadow=1;" value="deepglobe.py&#xa;(DataLoader)" vertex="1">
+          <mxGeometry height="360" width="100" x="280" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="life3" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;shadow=1;" value="SegFormer +&#xa;Evidential Head" vertex="1">
+          <mxGeometry height="360" width="120" x="460" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="life4" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;shadow=1;" value="evidential_loss.py&#xa;(KL Penalty)" vertex="1">
+          <mxGeometry height="360" width="120" x="660" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="edge1" edge="1" parent="1" source="life1" style="html=1;verticalAlign=bottom;endArrow=block;strokeWidth=2;" target="life2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="230" y="120" />
+            </Array>
+            <mxPoint x="140" y="120" as="sourcePoint" />
+            <mxPoint x="330" y="120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label1" connectable="0" parent="edge1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="request_batch()" vertex="1">
+          <mxGeometry relative="1" x="-0.1" y="-2" as="geometry">
+            <mxPoint y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge2" edge="1" parent="1" source="life2" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeWidth=2;" target="life1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="230" y="160" />
+            </Array>
+            <mxPoint x="330" y="160" as="sourcePoint" />
+            <mxPoint x="140" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label2" connectable="0" parent="edge2" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="images, masks (Tensors)" vertex="1">
+          <mxGeometry relative="1" x="0.1" y="-2" as="geometry">
+            <mxPoint y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge3" edge="1" parent="1" source="life1" style="html=1;verticalAlign=bottom;endArrow=block;strokeWidth=2;" target="life3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="330" y="220" />
+            </Array>
+            <mxPoint x="140" y="220" as="sourcePoint" />
+            <mxPoint x="520" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label3" connectable="0" parent="edge3" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="forward(images)" vertex="1">
+          <mxGeometry relative="1" x="-0.2" y="-2" as="geometry">
+            <mxPoint y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge4" edge="1" parent="1" source="life3" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeWidth=2;" target="life1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="330" y="260" />
+            </Array>
+            <mxPoint x="520" y="260" as="sourcePoint" />
+            <mxPoint x="140" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label4" connectable="0" parent="edge4" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="evidence (alpha parameters)" vertex="1">
+          <mxGeometry relative="1" x="0.2" y="-2" as="geometry">
+            <mxPoint x="39" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge5" edge="1" parent="1" source="life1" style="html=1;verticalAlign=bottom;endArrow=block;strokeWidth=2;" target="life4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="430" y="320" />
+            </Array>
+            <mxPoint x="140" y="320" as="sourcePoint" />
+            <mxPoint x="720" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label5" connectable="0" parent="edge5" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="compute_loss(alpha, masks, epoch)" vertex="1">
+          <mxGeometry relative="1" x="-0.3" y="-2" as="geometry">
+            <mxPoint y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge6" edge="1" parent="1" source="life4" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeWidth=2;" target="life1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="430" y="360" />
+            </Array>
+            <mxPoint x="720" y="360" as="sourcePoint" />
+            <mxPoint x="140" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label6" connectable="0" parent="edge6" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="total_loss (MSE + KL)" vertex="1">
+          <mxGeometry relative="1" x="0.3" y="-2" as="geometry">
+            <mxPoint y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge7" edge="1" parent="1" source="life1" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;" target="life1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="200" y="400" />
+              <mxPoint x="200" y="430" />
+            </Array>
+            <mxPoint x="140" y="400" as="sourcePoint" />
+            <mxPoint x="140" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label7" connectable="0" parent="edge7" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];" value="loss.backward()&#xa;optimizer.step()" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="10" y="40" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

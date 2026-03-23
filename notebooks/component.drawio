@@ -1,0 +1,76 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36" version="29.6.1">
+  <diagram id="component" name="Component">
+    <mxGraphModel dx="1185" dy="563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="comp_exp" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#000000;shadow=1;" value="&lt;b&gt;experiments/&lt;/b&gt;&lt;br&gt;(Execution Scripts)" vertex="1">
+          <mxGeometry height="60" width="180" x="320" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_conf" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#000000;shadow=1;" value="&lt;b&gt;configs/&lt;/b&gt;&lt;br&gt;(YAML Parsers)" vertex="1">
+          <mxGeometry height="60" width="140" x="40" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_data" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#000000;shadow=1;" value="&lt;b&gt;datasets/&lt;/b&gt;&lt;br&gt;(DeepGlobe Loader)" vertex="1">
+          <mxGeometry height="60" width="140" x="200" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_mod" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontColor=#000000;shadow=1;" value="&lt;b&gt;models/&lt;/b&gt;&lt;br&gt;(SegFormer + Evidential)" vertex="1">
+          <mxGeometry height="60" width="160" x="360" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_loss" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#000000;shadow=1;" value="&lt;b&gt;losses/&lt;/b&gt;&lt;br&gt;(Bayes Risk + KL)" vertex="1">
+          <mxGeometry height="60" width="140" x="540" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_metric" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#000000;shadow=1;" value="&lt;b&gt;metrics/&lt;/b&gt;&lt;br&gt;(mIoU, ECE, Brier)" vertex="1">
+          <mxGeometry height="60" width="140" x="700" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="edge1" edge="1" parent="1" source="comp_exp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;dashed=1;strokeColor=#333333;strokeWidth=2;" target="comp_conf">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="410" y="130" />
+              <mxPoint x="110" y="130" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge2" edge="1" parent="1" source="comp_exp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;dashed=1;strokeColor=#333333;strokeWidth=2;" target="comp_data">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="410" y="145" />
+              <mxPoint x="270" y="145" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge3" edge="1" parent="1" source="comp_exp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;dashed=1;strokeColor=#333333;strokeWidth=2;" target="comp_mod">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="410" y="160" />
+              <mxPoint x="440" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge4" edge="1" parent="1" source="comp_exp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;dashed=1;strokeColor=#333333;strokeWidth=2;" target="comp_loss">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="410" y="145" />
+              <mxPoint x="610" y="145" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge5" edge="1" parent="1" source="comp_exp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;dashed=1;strokeColor=#333333;strokeWidth=2;" target="comp_metric">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="410" y="130" />
+              <mxPoint x="770" y="130" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge6" edge="1" parent="1" source="comp_mod" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;dashed=1;strokeColor=#333333;strokeWidth=1;" target="comp_conf">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="440" y="290" />
+              <mxPoint x="110" y="290" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

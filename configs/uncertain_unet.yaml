@@ -1,0 +1,42 @@
+experiment_name: "uncertain_unet_resnet34"
+seed: 42
+
+model:
+  arch: "Unet"             # <--- NEW: Tells Factory to use U-Net
+  encoder: "resnet34"      # Standard CNN encoder
+  pretrained: true
+
+data:
+  dataset: "deepglobe"
+  root_dir: "/content/data/DeepGlobe"
+  num_classes: 7
+  ignore_index: 6
+  image_size: 512
+
+training:
+  device: "cuda"
+  epochs: 25
+  batch_size: 32           # CNNs are lighter, can use larger batch
+  num_workers: 8 
+  checkpoint_dir: "/content/drive/MyDrive/satellite-segmentation/checkpoints/unet"
+  output_dir: "/content/drive/MyDrive/satellite-segmentation/outputs/unet"
+  grad_clip: 1.0
+  resume: false
+
+optimizer:
+  lr: 0.0001               # CNNs like slightly higher LR (1e-4)
+  weight_decay: 0.0001
+
+scheduler:
+  min_lr: 0.000001
+
+loss:
+  name: "evidential"
+  annealing_step: 12
+
+augmentation:
+  color_jitter: 0.3
+  blur: 0.2
+  brightness_contrast: 0.5
+  noise: 0.2
+  center_crop_val: true

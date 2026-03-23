@@ -1,0 +1,73 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36" version="29.6.1">
+  <diagram id="deployment" name="Deployment">
+    <mxGraphModel dx="1185" dy="563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="node_server" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;shadow=1;" value="&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Workstation / Server Node (Ubuntu 22.04)&lt;/font&gt;&lt;/b&gt;" vertex="1">
+          <mxGeometry height="420" width="700" x="40" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="node_storage" parent="node_server" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fillColor=#ffe6cc;strokeColor=#d79b00;shadow=1;" value="&lt;b&gt;NVMe SSD Storage&lt;/b&gt;" vertex="1">
+          <mxGeometry height="140" width="220" x="40" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="art_data" parent="node_storage" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#ffffff;strokeColor=#333333;" value="DeepGlobe .tiff Images" vertex="1">
+          <mxGeometry height="60" width="160" x="30" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="node_cpu" parent="node_server" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;shadow=1;" value="&lt;b&gt;System CPU &amp; RAM (Host)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="140" width="220" x="40" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="art_loader" parent="node_cpu" style="shape=component;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;align=center;verticalAlign=middle;" value="PyTorch &lt;br&gt;&amp;nbsp;DataLoader Workers" vertex="1">
+          <mxGeometry height="60" width="180" x="20" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="node_gpu" parent="node_server" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fillColor=#d5e8d4;strokeColor=#82b366;shadow=1;" value="&lt;b&gt;NVIDIA A100 GPU (VRAM)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="320" width="260" x="400" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="art_model" parent="node_gpu" style="shape=component;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;align=center;verticalAlign=middle;" value="SegFormer &lt;br&gt;+ Evidential Head" vertex="1">
+          <mxGeometry height="60" width="180" x="40" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="art_loss" parent="node_gpu" style="shape=component;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;align=center;verticalAlign=middle;" value="Evidential Loss Graph" vertex="1">
+          <mxGeometry height="60" width="180" x="40" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="edge1" edge="1" parent="node_server" source="node_storage" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;startArrow=none;strokeWidth=2;strokeColor=#333333;" target="node_cpu">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="150" y="220" />
+              <mxPoint x="150" y="220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label_io" connectable="0" parent="edge1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="File I/O (Read .tiff)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="50" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge2" edge="1" parent="node_server" source="node_cpu" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;startArrow=none;strokeWidth=3;strokeColor=#0050ef;fontColor=#0050ef;" target="node_gpu">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="330" y="310" />
+              <mxPoint x="330" y="220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label_pcie" connectable="0" parent="edge2" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;b&gt;PCIe 4.0 Bus&lt;/b&gt;&#xa;(Tensor Transfer)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="65" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge3" edge="1" parent="node_server" source="art_model" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;startArrow=none;strokeWidth=2;strokeColor=#333333;dashed=1;" target="art_loss">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="530" y="160" />
+              <mxPoint x="530" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label_cuda" connectable="0" parent="edge3" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="CUDA Math" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="40" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
