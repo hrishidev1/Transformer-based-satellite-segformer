@@ -8,7 +8,7 @@ model:
 
 data:
   dataset: "deepglobe"
-  root_dir: "/content/data/DeepGlobe" # YOUR PATH
+  root_dir: "/content/data/DeepGlobe" # CHANGE TO YOUR PATH
   num_classes: 7
   ignore_index: 6
   image_size: 512
@@ -18,8 +18,8 @@ training:
   epochs: 30            # <--- BETTER: 30 epochs is usually sufficient for SegFormer
   batch_size: 32            # SegFormer is efficient, can use larger batch
   num_workers: 4           # More workers for faster data loading
-  checkpoint_dir: "/content/drive/MyDrive/satellite-segmentation/checkpoints/segformer"
-  output_dir: "/content/drive/MyDrive/satellite-segmentation/outputs/segformer"
+  checkpoint_dir: "/content/drive/MyDrive/satellite-segmentation/checkpoints/segformer" #CHANGE TO YOUR PATH
+  output_dir: "/content/drive/MyDrive/satellite-segmentation/outputs/segformer" #CHANGE TO YOUR PATH
   grad_clip: 1.0
   resume: false
 
