@@ -8,7 +8,7 @@ model:
 
 data:
   dataset: "deepglobe"
-  root_dir: "/content/data/DeepGlobe"
+  root_dir: "/content/data/DeepGlobe" #CHANGE TO YOUR PATH
   num_classes: 7
   ignore_index: 6
   image_size: 224
@@ -18,8 +18,8 @@ training:
   epochs: 25 
   batch_size: 32            # Swin is efficient, can use larger batch
   num_workers: 8
-  checkpoint_dir: "/content/drive/MyDrive/satellite-segmentation/checkpoints/swin"
-  output_dir: "/content/drive/MyDrive/satellite-segmentation/outputs/swin"
+  checkpoint_dir: "/content/drive/MyDrive/satellite-segmentation/checkpoints/swin" #CHANGE TO YOUR PATH
+  output_dir: "/content/drive/MyDrive/satellite-segmentation/outputs/swin" #CHANGE TO YOUR PATH
   grad_clip: 1.0
   resume: false
 
